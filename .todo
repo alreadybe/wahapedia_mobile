@@ -1,0 +1,15 @@
+// v.1
+1. Roster screen.
+    a. Get rosters from API.
+2. Create new roster.
+    a. Select faction.
+    b. Select units.
+    c. Save roster.
+3. Unit datasheets.
+4. Army cost calculator.
+
+// v.2
+1. CP calculator.
+2. Select psyhic power.
+3. Select relic and warlord trait.
+4. Use strategems before the battle.
