@@ -14,7 +14,7 @@ class InitialPage extends StatelessWidget {
         builder: (context, state) {
           if (state is InitialState) {
             BlocProvider.of<AppBloc>(context).add(DatasheetsRequested());
-            return Center(child: Text('Please wait'));
+            return Center(child: Text('Please wait...'));
           }
           if (state is LoadingRoster) {
             return Center(child: CircularProgressIndicator());

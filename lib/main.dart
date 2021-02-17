@@ -6,6 +6,7 @@ import 'package:wahapedia_mobile/blocs/blocs.dart';
 import 'package:wahapedia_mobile/repositories/repositories.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:wahapedia_mobile/widgets/chooseFaction.dart';
 import 'package:wahapedia_mobile/widgets/initialPage.dart';
 
 void main() {
@@ -26,7 +27,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Weather',
+      title: 'Army Builder',
+      routes: {
+        'ChooseFaction': (context) => ChooseFaction(),
+      },
       home: BlocProvider(
         create: (context) => AppBloc(appRepository: appRepository),
         child: InitialPage(),

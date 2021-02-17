@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
+import 'package:wahapedia_mobile/models/faction.dart';
 import 'package:wahapedia_mobile/models/models.dart';
 
 import 'package:wahapedia_mobile/repositories/repositories.dart';
@@ -14,6 +15,17 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
+    if (event is FactionRequested) {
+      yield LoadingFactions();
+
+      try {
+        final List<Faction> factions = await appRepository.getFactions();
+        yield LoadingFactionsSuccess(factions: factions);
+      } catch (_) {
+        LoadRosterFailure();
+      }
+    }
+
     if (event is DatasheetsRequested) {
       yield LoadingRoster();
 

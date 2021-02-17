@@ -10,6 +10,17 @@ class ApiClient {
 
   ApiClient({@required this.httpClient}) : assert(httpClient != null);
 
+  Future getAllFactions() async {
+    final factionsUrl = '$baseUrl/api/factions';
+    final factionRepsonse = await this.httpClient.get(factionsUrl);
+
+    if (factionRepsonse.statusCode != 200)
+      throw Exception('Error getting factions');
+
+    final factionsJson = jsonDecode(factionRepsonse.body) as List;
+    return factionsJson;
+  }
+
   Future getAllDatasheets() async {
     final datasheetsUrl = '$baseUrl/api/datasheets';
     final datasheetsResponse = await this.httpClient.get(datasheetsUrl);

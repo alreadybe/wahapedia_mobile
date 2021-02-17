@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
           Icons.add,
           color: Colors.black,
         ),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, 'ChooseFaction'),
         backgroundColor: Color(0xFF18ABCC),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
