@@ -1,10 +1,11 @@
-import 'package:equatable/equatable.dart';
-
-class Roster extends Equatable {
+class Roster {
   final String name;
 
   Roster({this.name});
 
-  @override
-  List<Object> get props => [name];
+  static Roster fromJson(dynamic json) {
+    return Roster(
+      name: json['name'],
+    );
+  }
 }

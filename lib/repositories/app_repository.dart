@@ -1,17 +1,17 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
 import 'package:wahapedia_mobile/models/faction.dart';
+import 'package:wahapedia_mobile/models/roster.dart';
 
 import 'api_client.dart';
 
 class AppRepository {
-  final ApiClient apiClient;
-
-  AppRepository({@required this.apiClient}) : assert(apiClient != null);
+  final ApiClient apiClient = ApiClient();
 
   Future<dynamic> getRosters() async {
-    return null;
+    List<dynamic> rawRosters = await apiClient.getRosters();
+    List<Roster> rosters = rawRosters.map((e) => Roster.fromJson(e)).toList();
+    return rosters;
   }
 
   Future<dynamic> getFactions() async {

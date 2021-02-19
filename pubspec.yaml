@@ -30,7 +30,6 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_bloc:
   bloc:
-  equatable:
   http: 
 
 dev_dependencies:

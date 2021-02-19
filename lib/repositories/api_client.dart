@@ -1,58 +1,81 @@
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'package:wahapedia_mobile/models/datasheet.dart';
 
 class ApiClient {
-  static const baseUrl = 'http://67e9d3e61434.ngrok.io';
-  final http.Client httpClient;
-
-  ApiClient({@required this.httpClient}) : assert(httpClient != null);
+  static const baseUrl = 'http://192.168.0.107:3001';
+  final http.Client httpClient = http.Client();
 
   Future getAllFactions() async {
-    final factionsUrl = '$baseUrl/api/factions';
-    final factionRepsonse = await this.httpClient.get(factionsUrl);
+    try {
+      final factionsUrl = '$baseUrl/api/factions';
+      final factionRepsonse = await this.httpClient.get(factionsUrl);
 
-    if (factionRepsonse.statusCode != 200)
-      throw Exception('Error getting factions');
+      final factionsJson = jsonDecode(factionRepsonse.body) as List;
+      return factionsJson;
+    } catch (_) {
+      print(_);
+    }
+  }
 
-    final factionsJson = jsonDecode(factionRepsonse.body) as List;
-    return factionsJson;
+  Future getRosters() async {
+    try {
+      final rostersUrl = '$baseUrl/api/rosters';
+      final rostersRepsonse = await this.httpClient.get(rostersUrl);
+
+      final rostersJson = jsonDecode(rostersRepsonse.body) as List;
+      return rostersJson;
+    } catch (_) {
+      print(_);
+    }
+  }
+
+  Future setRosters(Map<String, dynamic> roster) async {
+    try {
+      final rostersUrl = '$baseUrl/api/rosters';
+      final rostersResponce =
+          await this.httpClient.post(rostersUrl, body: roster);
+
+      return rostersResponce;
+    } catch (_) {
+      print(_);
+    }
   }
 
   Future getAllDatasheets() async {
-    final datasheetsUrl = '$baseUrl/api/datasheets';
-    final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
+    try {
+      final datasheetsUrl = '$baseUrl/api/datasheets';
+      final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
 
-    if (datasheetsResponse.statusCode != 200)
-      throw Exception('error getting datasheets');
-
-    final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
-    return datasheetsJson;
+      final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
+      return datasheetsJson;
+    } catch (_) {
+      print(_);
+    }
   }
 
   Future<dynamic> getDatasheetsByFaction(String factionId) async {
-    final datasheetsUrl = '$baseUrl/api/datasheets?factionId=$factionId';
-    final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
+    try {
+      final datasheetsUrl = '$baseUrl/api/datasheets?factionId=$factionId';
+      final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
 
-    print(datasheetsResponse.statusCode);
-
-    if (datasheetsResponse.statusCode != 200)
-      throw Exception('error getting datasheets');
-
-    final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
-    return datasheetsJson;
+      final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
+      return datasheetsJson;
+    } catch (_) {
+      print(_);
+    }
   }
 
   Future<dynamic> getDatasheetsById(String id) async {
-    final datasheetsUrl = '$baseUrl/api/datasheets?id=$id';
-    final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
+    try {
+      final datasheetsUrl = '$baseUrl/api/datasheets?id=$id';
+      final datasheetsResponse = await this.httpClient.get(datasheetsUrl);
 
-    if (datasheetsResponse.statusCode != 200)
-      throw Exception('error getting datasheets');
-
-    final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
-    return Datasheet.fromJson(datasheetsJson);
+      final datasheetsJson = jsonDecode(datasheetsResponse.body) as List;
+      return Datasheet.fromJson(datasheetsJson);
+    } catch (_) {
+      print(_);
+    }
   }
 }

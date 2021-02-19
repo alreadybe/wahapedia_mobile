@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class Datasheet extends Equatable {
+class Datasheet {
   final String id;
   final String name;
   final String factionId;
@@ -8,9 +6,6 @@ class Datasheet extends Equatable {
   final String cost;
 
   Datasheet({this.id, this.name, this.factionId, this.role, this.cost});
-
-  @override
-  List<Object> get props => [id, name, factionId, role, cost];
 
   static Datasheet fromJson(dynamic json) {
     return Datasheet(
